@@ -507,4 +507,21 @@ var minDepth = function(root) {
   return 1 + (Math.min(L, R) || Math.max(L, R))
 };
 
-console.log(minDepth(tree));
+// console.log(minDepth(tree));
+
+/**
+ * @param {number} x
+ * @return {number}
+ * https://leetcode.com/problems/reverse-integer/
+ */
+var reverse = function(x) {
+  const sign = x > 0 ? 1 : -1; 
+  let temp =  String(Math.abs(x)).split('');
+  let strnum = temp.reverse();
+  // console.log(strnum);
+  let result = sign*Number(strnum.join(''));
+  return (result < Math.pow(2, 31) - 1 && result > -1 * Math.pow(2, 31)) ?  result: 0;
+    
+};
+
+// console.log(reverse(1234));
