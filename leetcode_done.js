@@ -525,3 +525,125 @@ var reverse = function(x) {
 };
 
 // console.log(reverse(1234));
+
+/**
+ * @param {string} s
+ * @return {string}
+ *https://leetcode.com/problems/longest-palindromic-substring/
+ */
+var longestPalindrome = function(s) {
+  if(s.length <= 1) return s;
+  let palindromic = '';
+  for(let i = 0; i < s.length; i++){
+      for(let j = 0; j < 2; j++){
+          var right = i;
+          var left = i + j;
+          while(s[left] && s[left] == s[right]){
+              right ++;
+              left --;
+          }
+          if(palindromic.length < right - left - 1){
+              palindromic = s.substring(left+1, right);
+          }
+      }
+  }
+  return palindromic;
+};
+
+// console.log(
+//   longestPalindrome(
+//     "aksdjlasjdlajfhhhhhhhhhhhhhhhwqieuqiew"
+//   )
+// );
+
+
+
+/*
+ * Complete the 'zeroesToCenter' function below.
+ *
+ * The function is expected to return an INTEGER_ARRAY.
+ * The function accepts INTEGER_ARRAY arr as parameter.
+ */
+
+function zeroesToCenter(arr) {
+  let left = [],
+    right = [],
+    zeros = [];
+  let mid = Math.floor(arr.length / 2);
+  for (let i = 0; i < arr.length; i++) {
+    if(i < mid){
+        arr[i] == 0 ? zeros.push(arr[i]): left.push(arr[i]);
+    }else{
+        arr[i] == 0 ? zeros.push(arr[i]) : right.push(arr[i]);
+    }
+  }
+  return left.concat(zeros.concat(right));
+}
+
+// console.log(
+//   zeroesToCenter([
+//     '6', '7', 0,
+//     '7', '8', '10',
+//     '11', '12', '13'
+//   ])
+// );
+
+
+
+/**
+ * @param {number} x
+ * @return {boolean}
+ * https://leetcode.com/problems/palindrome-number/
+ */
+var isPalindrome = function(x) {
+  if(x < 0) return false;
+  const strx = new String(x);
+  const mid = Math.floor(strx.length/2);
+  let left = 0, right = strx.length - 1;
+  while(left < right){
+      if(strx[left] != strx[right]) return false;
+      left++;
+      right--;
+  }
+  return true;
+};
+
+// console.log(isPalindrome(10));
+
+
+/**
+ * @param {string} s
+ * @return {number}
+ * https://leetcode.com/problems/string-to-integer-atoi/
+ */
+var myAtoi = function(s) {
+  const digit = "0123456789".split('');
+  const op = "+-".split('');
+  let num = "", i = 0;
+  while(i < s.length){
+      if(digit.indexOf(s[i]) >= 0 || (op.indexOf(s[i]) >= 0 && num.length == 0)){
+          num += s[i];
+          i ++;
+      }else if(s[i] == " " && num.length == 0){ //skip white spaces
+          i ++;
+      }else{
+          if(num.indexOf("+") + num.indexOf("-") >= 0 ||// +, - both exist, return 0
+          num.indexOf("+") > 0 || // +/- not at the beginnig
+          num.indexOf("-") > 0 ||
+          isNaN(Number(num))) // + or -only
+          return 0; 
+          break;
+      }
+  }
+  // console.log(num);
+  num = Number(num);
+  if(num <= -1 * Math.pow(2, 31)){
+      return -1 * Math.pow(2, 31);
+  }else if(num >= Math.pow(2, 31) - 1){
+      return Math.pow(2, 31) - 1;
+  }else{
+      return isNaN(num) ? 0 : num;
+  }
+};
+
+// console.log(myAtoi("-0")); 
