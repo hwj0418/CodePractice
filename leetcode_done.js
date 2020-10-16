@@ -566,27 +566,23 @@ var longestPalindrome = function(s) {
  */
 
 function zeroesToCenter(arr) {
-  let left = [],
-    right = [],
-    zeros = [];
-  let mid = Math.floor(arr.length / 2);
-  for (let i = 0; i < arr.length; i++) {
-    if(i < mid){
-        arr[i] == 0 ? zeros.push(arr[i]): left.push(arr[i]);
-    }else{
-        arr[i] == 0 ? zeros.push(arr[i]) : right.push(arr[i]);
-    }
-  }
-  return left.concat(zeros.concat(right));
+  let nums = [],
+    zeroes = [];
+  arr.forEach(num => {
+      num == 0 ? zeroes.push(num) : nums.push(num);
+  });
+  let mid = Math.floor(nums.length / 2);
+  nums.splice(mid, 0, ...zeroes);
+  return nums;
 }
 
-// console.log(
-//   zeroesToCenter([
-//     '6', '7', 0,
-//     '7', '8', '10',
-//     '11', '12', '13'
-//   ])
-// );
+//   console.log(
+//     zeroesToCenter([
+//       '6', '7', 0,
+//       '7', '8', '10',
+//       '11', '12', '13'
+//     ])
+//   );
 
 
 
