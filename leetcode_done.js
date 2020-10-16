@@ -647,3 +647,53 @@ var myAtoi = function(s) {
 };
 
 // console.log(myAtoi("-0")); 
+
+/**
+ * @param {number[]} height
+ * @return {number}
+ * https://leetcode.com/problems/container-with-most-water/
+ */
+var maxArea = function(height) {
+    
+};
+
+/**
+ * @param {string} s
+ * @return {number}
+ * https://leetcode.com/problems/roman-to-integer/
+ */
+var romanToInt = function(s) {
+    
+};
+
+/*
+ * Complete the 'decryptPassword' function below.
+ *
+ * The function is expected to return a STRING.
+ * The function accepts STRING s as parameter.
+ */
+
+function decryptPassword(s) {
+    // Write your code here
+    let head = 0, tail = s.length - 1, decrypt = [];
+    while(head <= tail){
+        if(s[tail] == "*"){
+            //swap s[tail-1], s[tail-2]
+            decrypt.push(s[tail-2]);
+            decrypt.push(s[tail-1]);
+            tail -= 3;
+        }else if(! isNaN(Number(s[tail]))){
+            decrypt.push(s[head]);
+            head ++;
+            tail --;
+        }
+        else{
+            decrypt.push(s[tail]);
+            tail --;
+        }
+    }
+    decrypt.reverse();
+    return decrypt.join('');
+}
+
+// console.log("pTo*Ta*O\n", decryptPassword("pTo*Ta*O"));
