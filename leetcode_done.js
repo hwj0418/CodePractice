@@ -644,24 +644,6 @@ var myAtoi = function(s) {
 
 // console.log(myAtoi("-0")); 
 
-/**
- * @param {number[]} height
- * @return {number}
- * https://leetcode.com/problems/container-with-most-water/
- */
-var maxArea = function(height) {
-    
-};
-
-/**
- * @param {string} s
- * @return {number}
- * https://leetcode.com/problems/roman-to-integer/
- */
-var romanToInt = function(s) {
-    
-};
-
 /*
  * Complete the 'decryptPassword' function below.
  *
@@ -693,3 +675,82 @@ function decryptPassword(s) {
 }
 
 // console.log("pTo*Ta*O\n", decryptPassword("pTo*Ta*O"));
+
+
+/**
+ * @param {string} s
+ * @return {number}
+ * https://leetcode.com/problems/roman-to-integer/
+ */
+var romanToInt = function (s) {
+  let count = 0;
+  for (let i = s.length - 1; i >= 0; i--) {
+    switch (s[i]) {
+      case "I":
+        s[i + 1] == "V" || s[i + 1] == "X" ? count-- : count++;
+        break;
+
+      case "V":
+        count += 5;
+        break;
+
+      case "X":
+        s[i + 1] == "L" || s[i + 1] == "C" ? (count -= 10) : (count += 10);
+        break;
+
+      case "L":
+        count += 50;
+        break;
+
+      case "C":
+        s[i + 1] == "D" || s[i + 1] == "M" ? (count -= 100) : (count += 100);
+        break;
+
+      case "D":
+        count += 500;
+        break;
+
+      case "M":
+        count += 1000;
+        break;
+
+      default:
+        break;
+    }
+  }
+  return count;
+};
+
+// console.log(romanToInt("III")); // 3
+// console.log(romanToInt("IV")); // 4
+// console.log(romanToInt("VI")); // 6
+
+/**
+ * @param {number[]} height
+ * @return {number}
+ * https://leetcode.com/problems/container-with-most-water/
+ */
+var maxArea = function (height) {
+  let left = 0, right = height.length - 1;
+  let maxArea = -1;
+  console.log(height);
+  while(left < right){
+      console.log(height[left], height[right]);
+      if(height[left] < height[right]){
+          maxArea = Math.max(height[left]*(right-left) , maxArea);
+          left++;
+      }else{
+          maxArea = Math.max(height[right]*(right-left) , maxArea);
+          right--;
+      }
+  }
+  return maxArea;
+};
+
+// console.log(maxArea([1,8,6,2,5,4,8,3,7])); //49
+// console.log(maxArea([1,1])); //1
+// console.log(maxArea([4,3,2,1,4])); //16
+// console.log(maxArea([1,3,2,5,25,24,5])); //24
+// console.log(maxArea([1,8,6,2,5,4,8,3,7])); //49
+
+
