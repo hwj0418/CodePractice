@@ -754,3 +754,49 @@ var maxArea = function (height) {
 // console.log(maxArea([1,8,6,2,5,4,8,3,7])); //49
 
 
+/**
+ * @param {number} num
+ * @return {string}
+ * https://leetcode.com/problems/integer-to-roman/
+ */
+var intToRoman = function (num) {
+  //1994 "MCMXCIV"
+
+  const roman_10_denote = [
+    "I", // 10**0
+    "X", // 10**1
+    "C", // 10**2
+    "M", // 10**3
+  ];
+  const roman_5_denote = [
+    "V", //5 * 10**0
+    "L", //5 * 10**1
+    "D" //5 * 10**2
+  ];
+
+  let roman = "";
+  let i = Math.floor(Math.log10(num));
+  while (num > 0) {
+    const numi = Math.floor(num / 10 ** i); //1994
+    if (numi == 9) {
+      roman += roman_10_denote[i] + roman_10_denote[i+1];
+    } else if (numi == 4) {
+      roman += roman_10_denote[i] + roman_5_denote[i];
+    } else if (numi == 5) {
+      roman += roman_5_denote[i];
+    } else if (numi > 5) {
+      const gt5 = numi - 5;
+      roman += roman_5_denote[i] + roman_10_denote[i].repeat(gt5);
+    } else {
+      roman += roman_10_denote[i].repeat(numi);
+    }
+    console.log(num, numi, i, roman);
+    num = num % 10 ** i;
+    if(i > 0) i--;
+  }
+
+  return roman;
+};
+
+// console.log(intToRoman(40)); // M CM XC IV
+// console.log(intToRoman(3999)); // MMM CM XC IX
