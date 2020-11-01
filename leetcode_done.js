@@ -360,7 +360,7 @@ var inorderTraversal = function (root, res = []) {
   return res;
 };
 
-console.log(inorderTraversal(tree));
+// console.log(inorderTraversal(tree));
 
 /**
  * Definition for a binary tree node.
@@ -800,3 +800,93 @@ var intToRoman = function (num) {
 
 // console.log(intToRoman(40)); // M CM XC IV
 // console.log(intToRoman(3999)); // MMM CM XC IX
+
+/**
+ * @param {string[]} strs
+ * @return {string}
+ * https://leetcode.com/problems/longest-common-prefix/
+ */
+var longestCommonPrefix = function (strs) {
+  if (strs.length < 1) return "";
+
+  let common_prefix = "";
+  let shortest = strs[0];
+  for (let i = 1; i < strs.length; i++) {
+    if (strs[i].length < shortest.length) shortest = strs[i];
+  }
+  let i = 0,
+    j = 0;
+  while (i < shortest.length) {
+    // console.log(strs[j][i], shortest);
+		if (strs[j][i] != shortest[i]) break;
+		else j++;
+    if (j == strs.length) {
+      common_prefix += shortest[i];
+      j = 0;
+      i++;
+    }
+  }
+
+  return common_prefix;
+};
+
+// console.log(longestCommonPrefix(["car", "cir", "c"]));
+
+/**
+ * @param {string} s
+ * @return {string}
+ * https://leetcode.com/problems/make-the-string-great/
+ */
+var makeGood = function (s) {
+  console.log(s);
+  for (let i = 0; i < s.length - 1; i++) {
+    if (s[i] != s[i + 1] && s[i].toUpperCase() == s[i + 1].toUpperCase()) {
+      s = s.slice(0, i) + s.slice(i + 2);
+      return makeGood(s);
+    }
+  }
+
+  return s;
+};
+
+// console.log(makeGood("leEeetcode"));
+
+/**
+ * @param {string} text
+ * @return {string}
+ * https://leetcode.com/problems/rearrange-words-in-a-sentence/
+ */
+var arrangeWords = function (text) {
+  text = text.split(" ");
+  let text_map = new Map();
+  text.forEach((word) => {
+    const len = word.length;
+    text_map.has(len)
+      ? text_map.set(len, text_map.get(len) + " " + word.toLowerCase())
+      : text_map.set(len, word);
+  });
+
+	const text_map_sorted_by_len = new Map([...text_map.entries()].sort((a, b) => {return a[0] - b[0]}));
+	
+	console.log(text_map_sorted_by_len);
+
+	const sorted_text = [...text_map_sorted_by_len.values()];
+	
+	console.log(sorted_text);
+
+  let final_text = "";
+
+  while (sorted_text.length > 0) {
+    let cur_word = sorted_text.shift();
+    // console.log(cur_word);
+    if (final_text.length < 1) {
+      final_text += cur_word.charAt(0).toUpperCase() + cur_word.slice(1) + " ";
+    } else {
+      final_text += cur_word.toLowerCase() + " ";
+    }
+  }
+
+  return final_text.slice(0, final_text.length - 1);
+};
+
+// console.log(arrangeWords("Thirty days challengue"));

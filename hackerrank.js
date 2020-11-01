@@ -623,7 +623,7 @@ function toWord(num){
 
 }
 
-console.log(toWord(100000)); //1,234,567,89
+// console.log(toWord(100000)); //1,234,567,89
 // console.log(inWords(1234567));
 
 
@@ -681,3 +681,50 @@ const lt20 = [
   "eighteen",
   "ninteen",
 ];
+
+
+// Complete the substrCount function below.
+function substrCount(n, s) {
+
+  let isSpecial = function (str) {
+    if (str == "" || (str.length == 2 && (str[0] != str[1]))) return false;
+
+    const mid = Math.floor(str.length / 2);
+    let temp = str.split("");
+    temp.splice(mid, 1);
+    return temp.every((c) => c == str[0]);
+  };
+
+  let special_sub_string_count = 0, i = 0, j = i+1;
+  while(i < n){
+    if(j > n){
+      i++;
+      j = i + 1;
+    }
+    const cur = s.slice(i, j);
+    // console.log(i, j,cur, isSpecial(cur));
+    if(isSpecial(cur)) special_sub_string_count++;
+    j++;
+  }
+  
+  return special_sub_string_count;
+
+}
+
+console.log(substrCount(7, "abcbaba"));
+
+// let is_pendulum = (str) => {
+
+//   const mid = Math.floor(str.length/2);
+  
+//   for(let i = 0; i < str.length; i++){
+//     if(i != mid && str[i] != str[0]) return false;
+//   }
+//   return true;
+// }
+
+// console.log(is_pendulum("bcb"));
+
+
+
+
