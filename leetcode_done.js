@@ -890,3 +890,80 @@ var arrangeWords = function (text) {
 };
 
 // console.log(arrangeWords("Thirty days challengue"));
+
+/**
+ * @param {string} s
+ * @return {boolean}
+ * https://leetcode.com/problems/valid-parentheses/
+ */
+var isValid = function(s) {
+
+	if(s.length == 0) return true;
+
+	let bracket_stack = [s[0]], i = 1;
+	const open_brackets = ["(", "{", "["];
+	const close_brackets = [")", "}", "]"];
+
+	while(i < s.length){
+		const cur = s[i];
+		if(open_brackets.includes(cur)) {
+			bracket_stack.push(cur);
+		}else{
+			const prev = bracket_stack.pop();
+			if(close_brackets.indexOf(cur) != open_brackets.indexOf(prev)) return false;
+		}
+		i++;
+	}
+	
+	return bracket_stack.length == 0;
+
+};
+
+// console.log(isValid("{}"));
+
+
+/**
+ * @param {string} digits
+ * @return {string[]}
+ * https://leetcode.com/problems/letter-combinations-of-a-phone-number/
+ */
+var letterCombinations = function(digits) {
+
+	let permutation = function(arr){
+		if(arr.length == 0) {
+			return [];
+		}else if (arr.length == 1) {
+			return arr[0];
+		} else {
+			var result = [];
+			var allCasesOfRest = permutation(arr.slice(1));  // recur with the rest of array
+			for (var i = 0; i < allCasesOfRest.length; i++) {
+				for (var j = 0; j < arr[0].length; j++) {
+					result.push(arr[0][j] + allCasesOfRest[i]);
+				}
+			}
+			return result;
+		}
+	};
+
+	let num_map = new Map();
+	num_map.set("2", ["a", "b", "c"]);
+	num_map.set("3", ["d", "e", "f"]);
+	num_map.set("4", ["g", "h", "i"]);
+	num_map.set("5", ["j", "k", "l"]);
+	num_map.set("6", ["m", "n", "o"]);
+	num_map.set("7", ["p", "q", "r", "s"]);
+	num_map.set("8", ["t", "u", "v"]);
+	num_map.set("9", ["w", "x", "y", "z"]);
+
+	let digits_arr = [];
+
+	for(let i = 0; i < digits.length; i++){
+		digits_arr.push(num_map.get(digits[i]));
+	}
+	console.log(digits_arr);
+
+	return permutation(digits_arr);
+};
+
+// console.log(letterCombinations("23"));
