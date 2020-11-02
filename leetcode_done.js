@@ -967,3 +967,32 @@ var letterCombinations = function(digits) {
 };
 
 // console.log(letterCombinations("23"));
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+
+/**
+ * @param {ListNode} head
+ * @return {boolean}
+ * https://leetcode.com/problems/linked-list-cycle/
+ * https://leetcode.com/problems/linked-list-cycle-ii/submissions/ 
+ */
+var hasCycle = function(head) {
+
+	let visited = [];
+	while(head){
+	  if(visited.includes(head)){
+			return head;
+		} 
+		visited.push(head);
+		head = head.next;
+	}
+
+	return null;
+    
+};
