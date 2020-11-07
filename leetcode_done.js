@@ -473,13 +473,6 @@ var isBalanced = function(root) {
 
 // console.log(isBalanced(tree));
 
-class TreeNode {
-  constructor(val, left, right) {
-    this.val = val === undefined ? 0 : val;
-    this.left = left === undefined ? null : left;
-    this.right = right === undefined ? null : right;
-  }
-}
 
 // let tree = new TreeNode(3, 
 //   new TreeNode(9), new TreeNode(20, 
@@ -995,4 +988,38 @@ var hasCycle = function(head) {
 
 	return null;
     
+};
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @param {number} n
+ * @return {ListNode}
+ * https://leetcode.com/problems/remove-nth-node-from-end-of-list/
+ */
+var removeNthFromEnd = function (head, n) {
+  if (!head.next && n == 1) return null;
+  let len = 0,
+    temp = head,
+    i = 0;
+  while (temp.next) {
+    len++;
+    temp = temp.next;
+  }
+  temp = head;
+  while (temp) {
+    if(len - n == -1) return head.next;
+    if (i == len - n) {
+      temp.next = temp.next.next;
+    }
+    temp = temp.next;
+    i++;
+  }
+  return head;
 };
