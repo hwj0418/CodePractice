@@ -1,3 +1,18 @@
+class ListNode {
+  constructor(val, next) {
+    this.val = val === undefined ? 0 : val;
+    this.next = next === undefined ? null : next;
+  }
+}
+
+class TreeNode {
+  constructor(val, left, right) {
+    this.val = val === undefined ? 0 : val;
+    this.left = left === undefined ? null : left;
+    this.right = right === undefined ? null : right;
+  }
+}
+
 /**
  * @param {character[]} s
  * @return {void} Do not return anything, modify s in-place instead.
@@ -327,13 +342,7 @@ var calculate = function (s) {
 //" 2-1 + 2 " -> 3
 //"2-4-(8+2-6+(8+4-(1)+8-10))" -> -15
 
-class TreeNode {
-  constructor(val, left, right) {
-    this.val = val === undefined ? 0 : val;
-    this.left = left === undefined ? null : left;
-    this.right = right === undefined ? null : right;
-  }
-}
+
 
 let tree = new TreeNode(1, new TreeNode(2), new TreeNode(3, new TreeNode(4)));
 
@@ -1023,3 +1032,51 @@ var removeNthFromEnd = function (head, n) {
   }
   return head;
 };
+
+var mergeTwoLists = function (l1, l2) {
+  let head = new ListNode(),
+    ptr = head;
+
+  while (l1 && l2) {
+    if (l1.val < l2.val) {
+      //l1 = l1 -> l2 -> l1.next ; l2 = l2.next
+      ptr.next = l1;
+      l1 = l1.next;
+    } else {
+      ptr.next = l2;
+      l2 = l2.next;
+    }
+    ptr = ptr.next;
+  }
+
+  l1 ? (ptr.next = l1) : (ptr.next = l2);
+
+  return head.next;
+};
+
+// let l1 = new ListNode(1, new ListNode(2, new ListNode(4)));
+
+
+// let l2 = new ListNode(1, new ListNode(3, new ListNode(4)));
+
+// console.log(mergeTwoLists(l1, l2));
+
+
+/**
+ * @param {number[]} nums
+ * @param {number} val
+ * @return {number}
+ * https://leetcode.com/problems/remove-element/
+ */
+var removeElement = function(nums, val) {
+  let i = 0;
+  while(i < nums.length){
+    if(nums[i] == val) nums.splice(nums.indexOf(val), 1); 
+    i++;
+  }
+  return nums;
+
+};
+
+// console.log(removeElement([3,2,2,3], 3));
+
