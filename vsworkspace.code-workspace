@@ -1,0 +1,28 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../e-commerce-spa"
+		},
+		{
+			"path": "../wanjing-huang-profile"
+		},
+		{
+			"path": "../tic-tac-toe"
+		},
+		{
+			"path": "../booking-system"
+		}
+	],
+	"settings": {
+		"files.exclude": {
+			"**/.classpath": true,
+			"**/.project": true,
+			"**/.settings": true,
+			"**/.factorypath": true
+		},
+		"git.ignoreLimitWarning": true
+	}
+}
