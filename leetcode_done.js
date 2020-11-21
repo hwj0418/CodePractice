@@ -178,7 +178,7 @@ var topKFrequent = function (nums, k) {
     freq.set(num, freq.get(num) ? freq.get(num) + 1 : 1);
   }
   let sortedFreq = new Map([...freq.entries()].sort((a, b) => b[1] - a[1])); //sort by decending order
-  // console.log(sortedFreq);
+  // console.log(sortedFreq.entries());
   for (key of sortedFreq.keys()) {
     if (k == 0) break;
     topKFrequent.push(key);
@@ -186,7 +186,8 @@ var topKFrequent = function (nums, k) {
   }
   return topKFrequent;
 };
-// console.log(topKFrequent(["a","a","b","b","c","d","e","e","e"], 2));
+
+console.log("top 2 freq element", topKFrequent(["a","a","b","b","c","d","e","e","e"], 2));
 
 /**
  * @param {number[]} nums
@@ -487,7 +488,7 @@ var isBalanced = function(root) {
 //   new TreeNode(9), new TreeNode(20, 
 //     new TreeNode(15), new TreeNode(7)));
 
-let tree = new TreeNode(1, new TreeNode(2), null);
+// let tree = new TreeNode(1, new TreeNode(2), null);
 
 
 /**
