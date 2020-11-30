@@ -54,3 +54,19 @@ var sortList = function (head) {
 // let l2 = new ListNode(4, new ListNode(2, new ListNode(1, new ListNode(3))));
 // console.log(sortList(l2));
 
+/**
+ * @param {number[][]} intervals
+ * @return {number[]}
+ * https://leetcode.com/problems/find-right-interval/
+ */
+var findRightInterval = function (intervals) {
+  const sorted_intervals = new Map();
+}
+
+console.log(
+  findRightInterval([
+    [3, 4],
+    [2, 3],
+    [1, 2],
+  ])
+);

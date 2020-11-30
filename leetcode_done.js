@@ -1081,3 +1081,32 @@ var removeElement = function(nums, val) {
 
 // console.log(removeElement([3,2,2,3], 3));
 
+/**
+ * @param {number} dividend
+ * @param {number} divisor
+ * @return {number}
+ * https://leetcode.com/problems/divide-two-integers/
+ */
+var divide = function(dividend, divisor) {
+
+  const min = -(2**31), max = 2**31 - 1;
+  let result = 0, positive = false;
+  if((dividend < 0 && divisor < 0) || (dividend > 0 && divisor > 0)) positive = true;
+
+  let validator = function validation(num){
+    if(num < min) return min;
+    else if(max < num) return max;
+    else return num;
+  }
+  dividend = Math.abs(dividend);
+  divisor = Math.abs(divisor);
+  if(divisor == 1) return positive ? validator(dividend) : validator(-dividend);
+  while(dividend > 0 && dividend >= divisor){
+    dividend -= divisor;
+    result++;
+  }
+  
+  return positive ? validator(result) : validator(-result);
+};
+
+console.log(divide(-1,1)); 
