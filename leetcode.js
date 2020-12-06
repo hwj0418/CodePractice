@@ -19,6 +19,10 @@ class ListNode {
   }
 }
 
+let l1 = new ListNode(-1, new ListNode(5, new ListNode(3, new ListNode(4, new ListNode(0)))));
+let l2 = new ListNode(1, new ListNode(2, new ListNode(3)));
+
+
 /**
  * @param {ListNode} head
  * @return {ListNode}
@@ -50,8 +54,6 @@ var sortList = function (head) {
   return head_holder.next;
 };
 
-// let l1 = new ListNode(-1, new ListNode(5, new ListNode(3, new ListNode(4, new ListNode(0)))));
-// let l2 = new ListNode(4, new ListNode(2, new ListNode(1, new ListNode(3))));
 // console.log(sortList(l2));
 
 /**
@@ -60,13 +62,35 @@ var sortList = function (head) {
  * https://leetcode.com/problems/find-right-interval/
  */
 var findRightInterval = function (intervals) {
-  const sorted_intervals = new Map();
-}
+  if (intervals.length <= 1) return [-1];
 
-console.log(
-  findRightInterval([
-    [3, 4],
-    [2, 3],
-    [1, 2],
-  ])
-);
+  const n = intervals.length;
+
+  for(let i = 0; i < n; i++){
+    const start_point = intervals[i][1];
+    let temp = intervals.slice();
+    temp.splice(i, 1);
+    for(let j = 0; j < n-1; j++){
+      if(intervals[j][0] >= start_point && intervals[j][0] < min_val) min_j = j;
+    }
+  }
+};
+
+// console.log(
+//   findRightInterval([
+//     [2, 3],
+//     [1, 4],
+//     [3, 4],
+//   ])
+// );
+
+
+
+/**
+ * @param {number[]} nums
+ * @return {void} Do not return anything, modify nums in-place instead.
+ * https://leetcode.com/problems/next-permutation/
+ */
+var nextPermutation = function(nums) {
+    
+};

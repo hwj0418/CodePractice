@@ -55,24 +55,24 @@ function promise1(){
 /**
  * Scope practice - closure
  */
-(function outer(x){
-    (function inner(x){
-        let innerX = 2*x;
-        console.log("outer x: " + x); 
-        console.log("innerX "+innerX);
-    })(x);
-    // console.log("try to access innerX: "+innerX);// ReferenceError: innerX is not defined
-})(5);
+// (function outer(x){
+//     (function inner(x){
+//         let innerX = 2*x;
+//         console.log("outer x: " + x); 
+//         console.log("innerX "+innerX);
+//     })(x);
+//     // console.log("try to access innerX: "+innerX);// ReferenceError: innerX is not defined
+// })(5);
 
 /**
  * a comparison function is only required to return a positive number to say “greater” 
  * and a negative number to say “less”.
  */
-(function sort1(arr){
-    arr.sort((a,b) => { return a - b; }); //sort in accending order. [ 1, 2, 4, 8, 15 ]
-    // arr.sort( (a,b) => {return b - a;}); //sort in decending order. [ 15, 8, 4, 2, 1 ]
-    console.log(arr);
-})([ 4, 2, 8 ,1, 15 ]);
+// (function sort1(arr){
+//     arr.sort((a,b) => { return a - b; }); //sort in accending order. [ 1, 2, 4, 8, 15 ]
+//     // arr.sort( (a,b) => {return b - a;}); //sort in decending order. [ 15, 8, 4, 2, 1 ]
+//     console.log(arr);
+// })([ 4, 2, 8 ,1, 15 ]);
 
 /**
  *  usage of spread syntax (...)
@@ -83,7 +83,12 @@ function sum(...nums){
   
 const numbers = [1, 2, 3, 4, 5];
 
-console.log(sum(...numbers));
+// console.log(sum(...numbers));
 
-
+let a = [[1,2], [3,4], [5,6]];
+a.reduce((prev, cur)=>{
+    console.log("prev", prev, "cur", cur);
+    cur[0] > prev[1];
+});
+console.log(a);
 

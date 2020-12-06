@@ -1109,4 +1109,100 @@ var divide = function(dividend, divisor) {
   return positive ? validator(result) : validator(-result);
 };
 
-console.log(divide(-1,1)); 
+// console.log(divide(-1,1)); 
+
+/**
+ * @param {number[][]} accounts
+ * @return {number}
+ * https://leetcode.com/problems/richest-customer-wealth/
+ */
+var maximumWealth = function (accounts) {
+  for(let i = 0; i < accounts.length; i++){
+    accounts[i] = accounts[i].reduce((a, b)=>a+b, 0);
+  }
+  // console.log(accounts);
+  return Math.max(...accounts);
+};
+
+// console.log(maximumWealth([ [ 1, 2, 3 ], [ 3, 2, 1 ] ]));
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} node
+ * @return {void} Do not return anything, modify node in-place instead.
+ * https://leetcode.com/problems/delete-node-in-a-linked-list/
+ */
+var deleteNode = function(node) {
+  node.val = node.next.val;
+  node.next = node.next.next;
+};
+
+/**
+ * @param {number[]} digits
+ * @return {number[]}
+ */
+var plusOne = function(digits) {
+  const n = digits.length;
+  digits[n - 1] = digits[n - 1] + 1;
+  let i = n - 1;
+  while(i >= 0){
+      console.log(digits[i], digits);
+      if(digits[i] == 10 && i > 0) {
+          digits[i - 1] = digits[i - 1] + 1;
+          digits[i] = 0;
+      }else if(digits[i] == 10 && i == 0) {
+          digits.unshift(1);
+          i++;
+          digits[i] = 0;
+      }else i--;
+  }
+  return digits;
+};
+
+// console.log(plusOne([6,1,4,5,3,9,0,1,9,5,1,8,6,7,0,5,5,4,3]));
+
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ * https://leetcode.com/problems/swap-nodes-in-pairs/
+ */
+var swapPairs = function(head) {
+    
+  let printNode = (head) => {
+      let nodes = [];
+      while(head){
+          nodes.push(head.val);
+          head = head.next;
+      }
+      console.log(nodes);
+  }
+    
+  let head_holder = new ListNode(null, head), temp_head = head_holder;
+
+  while(temp_head.next && temp_head.next.next){
+    printNode(head_holder);
+    let temp = temp_head.next;
+    temp_head.next = temp_head.next.next;
+    temp.next = temp_head.next.next;
+    temp_head.next.next = temp;
+    temp_head = temp_head.next.next;
+  }
+  printNode(head_holder.next);
+  return head_holder.next;
+};
+
+// console.log(swapPairs(l2));
