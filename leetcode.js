@@ -92,5 +92,24 @@ var findRightInterval = function (intervals) {
  * https://leetcode.com/problems/next-permutation/
  */
 var nextPermutation = function(nums) {
-    
+
+  //check if the nums already in decreasing order or has length = 1
+  if(nums.length == 1) return nums;
+  let descNums = nums.slice();
+  descNums.sort((a, b) => b-a);
+  if(Json.stringify(nums) == Json.stringify(descNums)) return nums;
+
+  let i = 1, n = nums.length;
+  //find the next non-max number
+  while(i < n && nums[i] != Math.max(nums)) i++;
+  //find the min number that's greater than the second number
+  let rest_nums = nums.slice(), j = i+1;
+  while(j < n){
+    //TODO
+    // if(rest_nums[j] == Math.min(rest_nums) && rest_nums[j] <= nums[i]) rest_nums
+  }
+  //swap them
+  
 };
+
+console.log(nextPermutation([1,1,5,1,2,3])); // [1,2,5,1,1,3];
